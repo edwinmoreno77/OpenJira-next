@@ -9,22 +9,22 @@ interface SeedEntry {
 }
 
 export const seedData: SeedData = {
-    entries: [  
+  entries: [  
     {
-      description: "Pendientes: dncwie cdohjcwo oiwjhedcx woehcowe woiedchowejwkedj",
+      description: "Pendientes: Esta es una tarea pendiente",
       status: "pending",
       createdAt: Date.now(),
     },
     {
-      description: "En Progreso: dncwie cdohjcwo oiwjhedcx woehcowe woiedchowejwkedj",
+      description: "En Progreso: Esta tarea esta en progreso",
       status: "in-progress",
       createdAt: Date.now() - 1000000,
     },
     {
-      description: "Terminadas: dncwie cdohjcwo oiwjhedcx woehcowe woiedchowejwkedj",
+      description: "Terminadas: Esta tarea fue terminada",
       status: "finished",
       createdAt: Date.now() - 100000,
     },
   
-    ]
+  ]
 }

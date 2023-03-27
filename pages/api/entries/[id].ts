@@ -17,15 +17,18 @@ export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
 
     switch (req.method) {
         case 'PUT':
-            return updateEntry(req, res)
+            return updateEntry(req, res);
+        case 'GET':
+            return getEntryById(req, res);
         default:
-            return res.status(400).json({message:'Metodo no existe'});
+            return res.status(400).json({message:'Metodo no existe' + req.method});
     }
 }
 
 async function updateEntry(req:NextApiRequest, res:NextApiResponse) {
     
     const { id } = req.query;
+
     await db.connect();
 
     const entryToUpdate = await Entry.findById(id)
@@ -48,5 +51,28 @@ async function updateEntry(req:NextApiRequest, res:NextApiResponse) {
        await db.disconnect();
        console.log(error);
        res.status(400).json({message: error.errors.status.message})
+    }
+}
+
+async function getEntryById(req: NextApiRequest, res: NextApiResponse) {
+
+    try {
+        const { id } = req.query;
+
+        await db.connect();
+    
+        const entry = await Entry.findById(id);
+        
+        await db.disconnect();
+
+        if (!entry) {
+            return res.status(400).json({message:'Entry no existe'})
+        }
+        
+        return res.status(200).json(entry)
+        
+    } catch (error) {
+        await db.disconnect();
+        console.log(error);
     }
 }

@@ -15,6 +15,10 @@ mongodb://localhost:27017//entriesdb
 
 Renombar el archivo **.env.template** a: **.env**
 
+- Reconstruir los módulos de Node:
+  ` yarn install`
+- Levantar Next: ` yarn dev`
+
 ## LLenar la base de datos con información de pruebas
 
 llamara:

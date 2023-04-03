@@ -16,9 +16,10 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, dispatch] = useReducer(entriesReducer, Entries_INITIAL_STATE);
   const { enqueueSnackbar } = useSnackbar();
 
-  const addNewEntry = async (description: string) => {
+  const addNewEntry = async (title: string, description: string) => {
     try {
       const { data } = await entriesApi.post<Entry>("/entries", {
+        title,
         description,
       });
 
@@ -44,13 +45,13 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }) => {
 
       //  mostrar snackbar
       if (showSnackbar)
-        enqueueSnackbar(`Entrada actualizada ${entry.description}`, {
+        enqueueSnackbar(`Entrada actualizada ${entry.title}`, {
           variant: "success",
           autoHideDuration: 1500,
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "right",
-          },
+          // anchorOrigin: {
+          //   vertical: "top",
+          //   horizontal: "right",
+          // },
         });
     } catch (error) {
       console.log(error);

@@ -33,17 +33,26 @@ interface Props {
 const EntryPage: React.FC<Props> = ({ entry }) => {
   const { updateEntry } = useContext(EntriesContext);
 
-  const [inputValue, setInputValue] = useState(entry.description);
+  const [inputTitleValue, setInputTitleValue] = useState(entry.title);
+  const [inputDescriptionValue, setInputDescriptionValue] = useState(
+    entry.description
+  );
   const [status, setStatus] = useState<EntryStatus>(entry.status);
   const [touched, setTouched] = useState(false);
 
   const isNotValid = useMemo(
-    () => inputValue.length <= 0 && touched,
-    [inputValue, touched]
+    () => inputTitleValue.length <= 0 && touched,
+    [inputTitleValue, touched]
   );
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+  const handleInputTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputTitleValue(event.target.value);
+  };
+
+  const handleInputDescriptionChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputDescriptionValue(event.target.value);
   };
 
   const onStatusChanged = (event: ChangeEvent<HTMLInputElement>) => {
@@ -51,23 +60,24 @@ const EntryPage: React.FC<Props> = ({ entry }) => {
   };
 
   const onSave = () => {
-    if (inputValue.trim().length === 0) return;
+    if (inputTitleValue.trim().length === 0) return;
 
     const updatedEntry: Entry = {
       ...entry,
       status,
-      description: inputValue,
+      title: inputTitleValue,
+      description: inputDescriptionValue,
     };
     updateEntry(updatedEntry, true);
   };
 
   return (
-    <Layouts title={inputValue.substring(0, 20) + "..."}>
+    <Layouts title={inputTitleValue.substring(0, 20) + "..."}>
       <Grid container justifyContent={"center"} sx={{ marginTop: 2 }}>
         <Grid item xs={12} sm={8} md={6}>
           <Card>
             <CardHeader
-              title={`Entrada: ${inputValue}`}
+              title={`Entrada: ${inputTitleValue}`}
               subheader={` Creada ${dateFunctions.getFormatDistanceToNow(
                 entry.createdAt
               )}`}
@@ -80,8 +90,22 @@ const EntryPage: React.FC<Props> = ({ entry }) => {
                 autoFocus
                 multiline
                 label="Titulo"
-                value={inputValue}
-                onChange={handleInputChange}
+                value={inputTitleValue}
+                onChange={handleInputTitleChange}
+                onBlur={() => setTouched(true)}
+                helperText={isNotValid && "Ingrese un valor"}
+                error={isNotValid}
+              />
+
+              <TextField
+                sx={{ marginTop: 2, marginBottom: 1 }}
+                fullWidth
+                placeholder="Descripción"
+                autoFocus
+                multiline
+                label="Descripción"
+                value={inputDescriptionValue}
+                onChange={handleInputDescriptionChange}
                 onBlur={() => setTouched(true)}
                 helperText={isNotValid && "Ingrese un valor"}
                 error={isNotValid}
@@ -106,7 +130,7 @@ const EntryPage: React.FC<Props> = ({ entry }) => {
                 variant="contained"
                 fullWidth
                 onClick={onSave}
-                disabled={inputValue.length <= 0}
+                disabled={inputTitleValue.length <= 0}
               >
                 Save
               </Button>

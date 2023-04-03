@@ -5,7 +5,7 @@ export interface ContextProps {
   entries: Entry[];
 
   //methods
-  addNewEntry: (description: string) => void;
+  addNewEntry: (title: string, description: string) => void;
   updateEntry: (entry: Entry, showSnackbar: boolean) => void;
 }
 

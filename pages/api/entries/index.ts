@@ -35,13 +35,16 @@ const getEntries = async (res: NextApiResponse<Data>) => {
 
 const postEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     
-    const { description = '' } = req.body
+    const { description = '', title='' } = req.body
 
     
     const newEntry = new Entry({
+        title,
         description,
         createdAt: Date.now(),
     })
+
+    
     
     try {
         await db.connect();

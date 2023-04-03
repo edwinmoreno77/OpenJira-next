@@ -7,6 +7,8 @@ type UIActionType =
     | { type: 'UI -Set isAddingEntry', payload: boolean }
     | { type: 'UI -Start Dragging' }
     | { type: 'UI -End Dragging' }
+    | { type: 'UI -IluminationOpen', payload:boolean }
+    
 
 export const uiReducer = (state: UIState, action: UIActionType): UIState => {
     
@@ -37,7 +39,11 @@ export const uiReducer = (state: UIState, action: UIActionType): UIState => {
                 ...state,
                 isDragging: false
             }
-    
+        case 'UI -IluminationOpen':
+            return {
+                ...state,
+                ilumination: !action.payload
+            } 
         default:
             return state;
     }

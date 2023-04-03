@@ -43,8 +43,11 @@ export const EntryCard: FC<Props> = ({ entry }) => {
     >
       <CardActionArea>
         <CardContent>
+          <Typography sx={{ whiteSpace: "pre-line", marginBottom: 1 }}>
+            {entry.title}
+          </Typography>
           <Typography sx={{ whiteSpace: "pre-line" }}>
-            {entry.description}
+            {entry.description.substring(0, 20) + "..."}
           </Typography>
         </CardContent>
 

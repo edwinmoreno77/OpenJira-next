@@ -9,7 +9,12 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { UIContext } from "../../context/ui";
 
-const menuItems: string[] = ["Inbox", "Starred", "Send Email", "Drafts"];
+const menuItems: string[] = [
+  "Inicio",
+  "Supervisores",
+  "Herramientas",
+  "Configuración",
+];
 
 export const Sidebar = () => {
   const { sidemenuOpen, closeSidemenu } = useContext(UIContext);
@@ -31,16 +36,6 @@ export const Sidebar = () => {
           ))}
         </List>
         <Divider />
-        <List>
-          {menuItems.map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <EmailOutlinedIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
       </Box>
     </Drawer>
   );

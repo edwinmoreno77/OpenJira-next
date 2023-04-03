@@ -12,18 +12,21 @@ export const darkTheme = createTheme({
         error: {
             main: red.A400
         },
-        },
-
-        components: {
-            MuiAppBar: {
-                defaultProps: {
-                    elevation: 0
-                },
-                styleOverrides: {
-                    root: {
-                        backgroundColor: '#4a148c'
-                    }
+    },
+    
+    components: {
+        MuiAppBar: {
+            defaultProps: {
+                elevation: 0
+            },
+            styleOverrides: {
+                root: {
+                    // backgroundColor: '#4a148c'
+                    backgroundColor: 'rgb(0, 25, 74)'
                 }
             }
         }
+    }
+
+
 });

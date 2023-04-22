@@ -12,6 +12,8 @@ import { UIContext } from "../../context/ui";
 const menuItems: string[] = [
   "Inicio",
   "Supervisores",
+  "Soldadores",
+  "Maestros",
   "Herramientas",
   "Configuración",
 ];

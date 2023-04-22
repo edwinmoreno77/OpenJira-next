@@ -29,12 +29,12 @@ export const Navbar = () => {
           <IconButton onClick={openSidemenu} size="large" edge="start">
             <MenuOutlinedIcon />
           </IconButton>
-          <NextLink href="/" passHref>
-            <Typography variant="h6" color="white">
-              {/* <Link underline="hover" color="white"> */}
-              OpenJira
-              {/* </Link> */}
-            </Typography>
+          <NextLink legacyBehavior href="/" passHref>
+            <Link underline="none" color="white">
+              <Typography variant="h6" color="white">
+                OpenJira
+              </Typography>
+            </Link>
           </NextLink>
         </Toolbar>
         <FormControlLabel

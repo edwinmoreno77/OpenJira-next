@@ -2,7 +2,7 @@
 
 <div style="display: flex; justify-content: center; gap: 10px;">
   <img src="https://github.com/edwinmoreno77/OpenJira-next/blob/main/assets/dragAndDrog.gif" alt="dragAndDrog" width="500">
-  <img src="https://github.com/edwinmoreno77/calendar-backend/blob/main/assets/calendarEvent.gif" alt="calendarEvent" width="500">
+  <img src="https://github.com/edwinmoreno77/OpenJira-next/blob/main/assets/themeChanged.gif" alt="themeChanged" width="500">
 </div>
 
 Para correr localmente, se necesita la base de datos.

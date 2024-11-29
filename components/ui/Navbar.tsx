@@ -40,7 +40,7 @@ export const Navbar = () => {
         <FormControlLabel
           control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
           onClick={() => iluminationOpen(ilumination)}
-          label
+          label=""
         />
       </Toolbar>
     </AppBar>

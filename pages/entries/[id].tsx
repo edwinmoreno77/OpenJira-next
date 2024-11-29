@@ -24,6 +24,7 @@ import {
 } from "@mui/material";
 import { Entry, EntryStatus } from "@/interfaces";
 import { dateFunctions } from "@/utils";
+import { useRouter } from "next/router";
 
 const validStatus: EntryStatus[] = ["pending", "in-progress", "finished"];
 
@@ -31,7 +32,7 @@ interface Props {
   entry: Entry;
 }
 const EntryPage: React.FC<Props> = ({ entry }) => {
-  const { updateEntry } = useContext(EntriesContext);
+  const { updateEntry, deleteEntry } = useContext(EntriesContext);
 
   const [inputTitleValue, setInputTitleValue] = useState(entry.title);
   const [inputDescriptionValue, setInputDescriptionValue] = useState(
@@ -39,6 +40,7 @@ const EntryPage: React.FC<Props> = ({ entry }) => {
   );
   const [status, setStatus] = useState<EntryStatus>(entry.status);
   const [touched, setTouched] = useState(false);
+  const router = useRouter();
 
   const isNotValid = useMemo(
     () => inputTitleValue.length <= 0 && touched,
@@ -69,6 +71,12 @@ const EntryPage: React.FC<Props> = ({ entry }) => {
       description: inputDescriptionValue,
     };
     updateEntry(updatedEntry, true);
+    router.push("/")
+  };
+
+  const onDelete = () => {
+    deleteEntry(entry);
+    router.push("/")
   };
 
   return (
@@ -139,6 +147,7 @@ const EntryPage: React.FC<Props> = ({ entry }) => {
         </Grid>
       </Grid>
       <IconButton
+        onClick={onDelete}
         sx={{
           position: "fixed",
           bottom: 30,

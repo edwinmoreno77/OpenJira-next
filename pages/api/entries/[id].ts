@@ -7,7 +7,7 @@ type Data =
     | { message: string }
     | IEntry
 
-export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
+const handler = (req: NextApiRequest, res: NextApiResponse<Data>) =>{
 
     const { id } = req.query;
     
@@ -20,6 +20,8 @@ export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
             return updateEntry(req, res);
         case 'GET':
             return getEntryById(req, res);
+        case 'DELETE':
+            return deleteEntry(req, res);
         default:
             return res.status(400).json({message:'Metodo no existe' + req.method});
     }
@@ -77,3 +79,28 @@ async function getEntryById(req: NextApiRequest, res: NextApiResponse) {
         console.log(error);
     }
 }
+
+async function deleteEntry(req: NextApiRequest, res: NextApiResponse) {
+
+    try {
+        const { id } = req.query;
+
+        await db.connect();
+    
+        const entry = await Entry.findByIdAndDelete(id);
+        
+        await db.disconnect();
+
+        if (!entry) {
+            return res.status(400).json({message:'Entry not found'})
+        }
+        
+        return res.status(200).json(entry)
+        
+    } catch (error) {
+        await db.disconnect();
+        console.log(error);
+    }
+}
+
+export default handler;

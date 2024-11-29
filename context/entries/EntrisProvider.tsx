@@ -3,6 +3,7 @@ import { useSnackbar } from "notistack";
 import { EntriesContext, entriesReducer } from "./";
 import { Entry } from "../../interfaces/entry";
 import { entriesApi } from "@/apis";
+import { log } from "console";
 
 export interface EntriesState {
   entries: Entry[];
@@ -58,6 +59,22 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   };
 
+  const deleteEntry = async (entry: Entry) => {
+    try {
+      const { data } = await entriesApi.delete<Entry>(
+        `/entries/${entry._id}`,
+      );
+      
+      dispatch({
+        type: "[Entries] -Entry-Deleted",
+        payload: data,
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   async function refreshEntries() {
     const { data } = await entriesApi.get<Entry[]>("/entries");
     dispatch({ type: "[Entries] -Refresh-Data", payload: data });
@@ -75,6 +92,7 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }) => {
         //methods
         addNewEntry,
         updateEntry,
+        deleteEntry,
       }}
     >
       {children}

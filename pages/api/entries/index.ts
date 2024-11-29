@@ -7,7 +7,7 @@ type Data =
     | IEntry[]
     | IEntry
 
-export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
+const handler = (req: NextApiRequest, res: NextApiResponse<Data>)=> {
 
     switch (req.method) {
         case 'GET':
@@ -64,3 +64,5 @@ const postEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
 
 }
+
+export default handler;

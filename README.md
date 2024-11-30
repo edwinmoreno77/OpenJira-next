@@ -5,7 +5,7 @@
   <img src="https://github.com/edwinmoreno77/OpenJira-next/blob/main/assets/themeChanged.gif" alt="themeChanged" width="500">
 </div>
 
-Para correr localmente, se necesita la base de datos.
+To run locally, you need the database.
 
 ```
 docker-compose up -d
@@ -14,17 +14,15 @@ docker-compose up -d
 MongoDB URL Local:
 mongodb://localhost:27017//entriesdb
 
-## Configurar las variables de entorno
+## Configure environment variables
 
-Renombar el archivo **.env.template** a: **.env**
+Rename the file **.env.template** to: **.env**
 
-- Reconstruir los módulos de Node:
+- Rebuild Node modules:
   ` yarn install`
-- Levantar Next: ` yarn dev`
+- run dev: ` yarn dev`
 
-## LLenar la base de datos con información de pruebas
-
-llamara:
+## Fill the database with test information
 
 ```
    http://localhost:3000/api/seed
